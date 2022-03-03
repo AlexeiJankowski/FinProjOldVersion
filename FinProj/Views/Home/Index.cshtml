@@ -1,0 +1,113 @@
+﻿@model List<Quote>
+
+@{
+    List<Ticker> tickersList = ViewData["tickersList"] as List<Ticker>;
+}
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+            var data = google.visualization.arrayToDataTable([
+                @foreach (var item in Model)
+                {
+                    @: ['@item.Date.ToShortDateString()', @item.Low.ToString("G", System.Globalization.CultureInfo.InvariantCulture), @item.Open.ToString("G", System.Globalization.CultureInfo.InvariantCulture), @item.Close.ToString("G", System.Globalization.CultureInfo.InvariantCulture), @item.High.ToString("G", System.Globalization.CultureInfo.InvariantCulture)],
+
+                }
+            ], true);
+
+            var options = {
+                legend: 'none',
+                hAxis: {
+                    textStyle: {
+                        fontSize: 9
+                    }
+                },
+                explorer: { axis: 'horizontal' }
+            };
+
+            var chart = new google.visualization.CandlestickChart(document.getElementById('chart_div'));
+
+            chart.draw(data, options);
+        }
+
+    </script>
+    <script type="text/javascript">
+        window.onload = function () {
+            var name = document.getElementById('tickers').options[document.getElementById('tickers').selectedIndex].innerHTML;
+            var period = document.getElementById('periods').options[document.getElementById('periods').selectedIndex].innerHTML;
+
+            for (var i = 1; i < 3; i++) {
+                document.getElementById("pageName" + [i]).innerHTML = name + ' ' + period + " Chart";
+            }
+        };
+
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title id="pageName1"></title>
+    <link rel="stylesheet" asp-href-include="/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" asp-href-include="/lib/bootstrap/dist/css/bootstrap-grid.css" />
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a id="pageName2" class="navbar-brand" href="#">AAPL</a>
+    </nav>
+    <br />
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3">
+
+                <form method="post" asp-action="Index">
+
+                    <div class="form-group">
+                        <select id="tickers" class="form-control" name="ticker">
+                            @foreach (Ticker ticker in tickersList)
+                            {
+                                if (ticker.TickerValue.ToLower() == ViewBag.Ticker.ToLower())
+                                {
+                                    <option value='@ticker.TickerValue' selected>@ticker.TickerName</option>
+                                }
+                                else
+                                {
+                                    <option value='@ticker.TickerValue'>@ticker.TickerName</option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+
+                    <div class="form-group">
+                        <select id="periods" class="form-control" name="period">
+                            <option value='1d'>Daily</option>
+                            <option value='1wk'>Weekly</option>
+                            <option value='1mo'>Montly</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label name="startDate">Start Date: </label>
+                        <input name="startDate" class="form-control" value="@DateTime.Now.Subtract(new TimeSpan(50,0,0,0)).ToShortDateString()" />
+                    </div>
+
+                    <div class="form-group">
+                        <label name="endDate">End Date: </label>
+                        <input name="endDate" class="form-control" value="@DateTime.Now.ToShortDateString()" />
+                    </div>
+
+                    <button class="btn btn-dark" type="submit">Load Chart</button>
+
+                </form>
+            </div>
+            <div class="col-9">
+                <div id="chart_div" style="height: 80vh;"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

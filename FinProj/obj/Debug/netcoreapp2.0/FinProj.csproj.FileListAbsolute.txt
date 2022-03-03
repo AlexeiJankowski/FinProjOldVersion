@@ -1,0 +1,14 @@
+C:\projects\Me\FinProj\FinProj\obj\Debug\netcoreapp2.0\FinProj.csproj.AssemblyReference.cache
+C:\projects\Me\FinProj\FinProj\obj\Debug\netcoreapp2.0\FinProj.AssemblyInfoInputs.cache
+C:\projects\Me\FinProj\FinProj\obj\Debug\netcoreapp2.0\FinProj.AssemblyInfo.cs
+C:\projects\Me\FinProj\FinProj\obj\Debug\netcoreapp2.0\FinProj.csproj.CoreCompileInputs.cache
+C:\projects\Me\FinProj\FinProj\bin\Debug\netcoreapp2.0\libman.json
+C:\projects\Me\FinProj\FinProj\bin\Debug\netcoreapp2.0\FinProj.deps.json
+C:\projects\Me\FinProj\FinProj\bin\Debug\netcoreapp2.0\FinProj.runtimeconfig.json
+C:\projects\Me\FinProj\FinProj\bin\Debug\netcoreapp2.0\FinProj.runtimeconfig.dev.json
+C:\projects\Me\FinProj\FinProj\bin\Debug\netcoreapp2.0\FinProj.dll
+C:\projects\Me\FinProj\FinProj\bin\Debug\netcoreapp2.0\FinProj.pdb
+C:\projects\Me\FinProj\FinProj\obj\Debug\netcoreapp2.0\FinProj.dll
+C:\projects\Me\FinProj\FinProj\obj\Debug\netcoreapp2.0\FinProj.pdb
+C:\projects\Me\FinProj\FinProj\obj\Debug\netcoreapp2.0\FinProj.genruntimeconfig.cache
+C:\projects\Me\FinProj\FinProj\bin\Debug\netcoreapp2.0\appsettings.json
